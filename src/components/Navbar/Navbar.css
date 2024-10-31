@@ -5,8 +5,9 @@
   align-items: center;
 }
 
-.navbar logo {
+.navbar .logo {
   width: 150px;
+  cursor: pointer;
 }
 
 .navbar-menu {
@@ -40,6 +41,10 @@
 
 .navbar-search-icon {
   position: relative;
+}
+
+.navbar-cart-icon {
+  cursor: pointer;
 }
 
 .navbar-search-icon .dot {
@@ -131,6 +136,13 @@
 
 @media (max-width: 750px) {
   .navbar-menu {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .navbar-right > img,
+  .navbar-right button {
     display: none;
   }
 }

@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { assets } from "../../assets/assets";
 import { StoreContext } from "../../context/StoreContext";
@@ -8,20 +8,27 @@ import { StoreContext } from "../../context/StoreContext";
 function Navbar({ setShowLogin }) {
   const [menu, setMenu] = useState("home");
   const { getTotalCartAmount } = useContext(StoreContext);
+  const navigate = useNavigate();
 
   return (
     <nav className="navbar">
-      <Link to="/">
-        <img src={assets.logo} alt="logo" />
-      </Link>
+      <img
+        className="logo"
+        onClick={() => navigate("/")}
+        src={assets.logo}
+        alt="logo"
+      />
       <ul className="navbar-menu">
-        <Link
-          to="/"
-          onClick={() => setMenu("home")}
+        <a
+          href="#"
+          onClick={() => {
+            setMenu("home");
+            navigate("/");
+          }}
           className={menu === "home" ? "active" : ""}
         >
           home
-        </Link>
+        </a>
         <a
           href="#explore-menu"
           onClick={() => setMenu("menu")}
@@ -47,9 +54,12 @@ function Navbar({ setShowLogin }) {
       <div className="navbar-right">
         <img src={assets.search_icon} alt="" />
         <div className="navbar-search-icon">
-          <Link to="/cart">
-            <img src={assets.basket_icon} alt="" />
-          </Link>
+          <img
+            className="navbar-cart-icon"
+            onClick={() => navigate("/cart")}
+            src={assets.basket_icon}
+            alt=""
+          />
           <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
         </div>
         <button onClick={() => setShowLogin(true)}>sign in</button>
